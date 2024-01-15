@@ -4,8 +4,7 @@ This project utilizes machine learning techniques to create an effective model f
 
 Project Contents:
 1. Load Required Libraries:
-R
-Copy code
+
 library(readr)
 library(tidyverse)
 library(mlbench)
@@ -16,8 +15,7 @@ library(MVN)
 library(MASS)
 options(warn=-1)
 2. Loading Data:
-R
-Copy code
+
 Parkinson1 <- read_csv("Parkinson1.csv")
 Parkinson3 <- read_csv("Parkinson3.csv")
 Train <- as.data.frame(Parkinson1)
@@ -29,29 +27,24 @@ Visualize variable distributions and correlations.
 Check for normality using multivariate normality tests.
 4. Data Preparation, Preprocessing, and Modeling:
 Data Cleaning:
-R
-Copy code
+
 # Remove columns with near zero variance
 varParams <- preProcess(Train[, -2], method=c("nzv"))
 print(varParams)
 Feature Selection:
-R
-Copy code
+
 # Dropping id column
 Train <- Train[,2:47]
 # Remove highly correlated independent variables
 Train<- Train[, -c(findCorrelation(cor(Train), cutoff=0.9))]
 Data Transforms:
-R
-Copy code
+
 # Convert dependent variable to factor
 Train$Status = as.factor(Train$Status)
 # Scale dataset
 normParams <- preProcess(Train[, -1], method=c("range"))
 Train[, -1] <- predict(normParams, Train[, -1])
 Modeling:
-R
-Copy code
 # Prepare resampling method
 trainControl <- trainControl(method="repeatedcv", number=10, repeats=3)
 metric <- "Accuracy"
