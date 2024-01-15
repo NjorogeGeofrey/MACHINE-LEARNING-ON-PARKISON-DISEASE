@@ -11,7 +11,7 @@ library(MASS)
 options(warn=-1) 
 
 
-#Loading the data
+#Loading the data. #The data can be found in UCL machine learning repository
 Parkinson1 <- read_csv("Parkinson1.csv")
 Parkinson3 <- read_csv("Parkinson3.csv")
 #Naming the data
